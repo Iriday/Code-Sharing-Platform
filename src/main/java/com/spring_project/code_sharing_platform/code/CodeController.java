@@ -5,8 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 @RestController
 public class CodeController {
     private final CodeService codeService;
@@ -17,11 +15,11 @@ public class CodeController {
     }
 
     @GetMapping("api/code")
-    ResponseEntity<Map.Entry<String, String>> getCodeAsJson() {
+    ResponseEntity<CodeDto> getCodeAsJson() {
         return ResponseEntity
                 .ok()
                 .header("Content-Type", "application/json")
-                .body(Map.entry("code", codeService.getCode()));
+                .body(codeService.getCode());
     }
 
     @GetMapping("/code")

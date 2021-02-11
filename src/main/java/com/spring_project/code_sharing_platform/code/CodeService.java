@@ -4,9 +4,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CodeService {
+    CodeDto codeDto = new CodeDto();
 
-    public String getCode() {  // temp
-        return "public static void main(String[] args){\n   System.out.println(\"Spring boot test\");\n}";
+    public CodeDto getCode() {
+        return codeDto;
     }
 
     public String getCodeAsHTML() { // temp
@@ -17,8 +18,9 @@ public class CodeService {
                 "    <title>Code</title>\n" +
                 "</head>\n" +
                 "<body>\n" +
-                "<pre>\n" +
-                getCode() + "\n" +
+                "<span id=\"load_date\">" + codeDto.getDate() + "</span>\n" +
+                "<pre id=\"code_snippet\">\n" +
+                codeDto.getCode() + "\n" +
                 "    </pre>\n" +
                 "</body>\n" +
                 "</html>";
