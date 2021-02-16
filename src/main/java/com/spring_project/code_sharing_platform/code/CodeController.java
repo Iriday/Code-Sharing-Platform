@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class CodeController {
@@ -38,5 +39,10 @@ public class CodeController {
                 .ok()
                 .header("Content-Type", "text/html")
                 .body(codeService.getCodeAsHTML());
+    }
+
+    @GetMapping("/code/new")
+    ModelAndView getInputCodePage() {
+        return new ModelAndView("input_code");
     }
 }
