@@ -2,11 +2,11 @@ package com.spring_project.code_sharing_platform.code;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.math.BigInteger;
+import java.util.Map;
 
 @RestController
 public class CodeController {
@@ -17,28 +17,28 @@ public class CodeController {
         this.codeService = codeService;
     }
 
-    @GetMapping("api/code")
-    ResponseEntity<CodeDto> getCodeAsJson() {
+    @GetMapping("api/code/{id}")
+    ResponseEntity<CodeDto> getCodeAsJson(@PathVariable BigInteger id) {
         return ResponseEntity
                 .ok()
                 .header("Content-Type", "application/json")
-                .body(codeService.getCode());
+                .body(codeService.getCode(id));
     }
 
     @PostMapping("api/code/new")
-    ResponseEntity<String> addCode(@RequestBody CodeDto codeDto) {
+    ResponseEntity<Map.Entry<String, String>> addCode(@RequestBody CodeDto codeDto) {
         return ResponseEntity
                 .ok()
                 .header("Content-Type", "application/json")
                 .body(codeService.addCode(codeDto));
     }
 
-    @GetMapping("/code")
-    ResponseEntity<String> getCodeAsHtml() {
+    @GetMapping("/code/{id}")
+    ResponseEntity<String> getCodeAsHtml(@PathVariable BigInteger id) {
         return ResponseEntity
                 .ok()
                 .header("Content-Type", "text/html")
-                .body(codeService.getCodeAsHTML());
+                .body(codeService.getCodeAsHTML(id));
     }
 
     @GetMapping("/code/new")
