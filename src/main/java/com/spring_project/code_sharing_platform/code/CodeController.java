@@ -34,11 +34,8 @@ public class CodeController {
     }
 
     @GetMapping("/code/{id}")
-    ResponseEntity<String> getCodeAsHtml(@PathVariable BigInteger id) {
-        return ResponseEntity
-                .ok()
-                .header("Content-Type", "text/html")
-                .body(codeService.getCodeAsHTML(id));
+    ModelAndView getCodeAsHtml(@PathVariable BigInteger id) {
+        return new ModelAndView("code", "CodeDto", codeService.getCode(id));
     }
 
     @GetMapping("/code/new")

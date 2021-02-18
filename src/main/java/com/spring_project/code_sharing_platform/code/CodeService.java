@@ -23,20 +23,4 @@ public class CodeService {
         tempDB.add(codeDto);
         return Map.entry("id", String.valueOf(tempDB.size()));
     }
-
-    public String getCodeAsHTML(BigInteger id) { // temp
-        return "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title>Code</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<span id=\"load_date\">" + tempDB.get(id.intValue() - 1).getDate() + "</span>\n" +
-                "<pre id=\"code_snippet\">\n" +
-                tempDB.get(id.intValue() - 1).getCode() + "\n" +
-                "    </pre>\n" +
-                "</body>\n" +
-                "</html>";
-    }
 }
