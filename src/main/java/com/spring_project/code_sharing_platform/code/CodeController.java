@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Map;
 
 @RestController
@@ -25,6 +26,14 @@ public class CodeController {
                 .body(codeService.getCode(id));
     }
 
+    @GetMapping("api/code/latest")
+    ResponseEntity<CodeDto[]> getCodeLatestAsJson() {
+        return ResponseEntity
+                .ok()
+                .header("Content-Type", "application/json")
+                .body(codeService.getLatest(10));
+    }
+
     @PostMapping("api/code/new")
     ResponseEntity<Map.Entry<String, String>> addCode(@RequestBody CodeDto codeDto) {
         return ResponseEntity
@@ -35,7 +44,12 @@ public class CodeController {
 
     @GetMapping("/code/{id}")
     ModelAndView getCodeAsHtml(@PathVariable BigInteger id) {
-        return new ModelAndView("code", "CodeDto", codeService.getCode(id));
+        return new ModelAndView("code", "codeDto", codeService.getCode(id));
+    }
+
+    @GetMapping("/code/latest")
+    ModelAndView getCodeLatestAsHtml() {
+        return new ModelAndView("code_latest", "codeDtoList", Arrays.asList(codeService.getLatest(10)));
     }
 
     @GetMapping("/code/new")

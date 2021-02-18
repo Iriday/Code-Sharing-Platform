@@ -5,7 +5,7 @@
     <title>Code</title>
 </head>
 <body>
-<span id="load_date">${CodeDto.getDate()}</span>
-<pre id="code_snippet">${CodeDto.getCode()}</pre>
+<span id="load_date">${codeDto.getDate()}</span>
+<pre id="code_snippet">${codeDto.getCode()}</pre>
 </body>
 </html>
