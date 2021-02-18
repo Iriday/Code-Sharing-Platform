@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Create</title>
+    <style type="text/css"><#include "css/input_code.css"></style>
 </head>
 <body>
 <form>
     <label><textarea id="code_snippet"></textarea></label>
+    <br>
     <button id="send_snippet" type="submit" onclick="send()">Submit</button>
 </form>
 <script>

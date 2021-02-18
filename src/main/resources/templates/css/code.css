@@ -1,0 +1,20 @@
+#code_and_date_container{
+    margin: 15px 35px 15px;
+}
+
+.code-and-date {
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+#load_date {
+    color: blue;
+    margin-top: 10px;
+}
+
+#code_snippet {
+    border: thin solid black;
+    border-radius: 3px;
+    background-color: gainsboro;
+    padding: 10px;
+}
