@@ -3,11 +3,11 @@ package com.spring_project.code_sharing_platform.code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class CodeService {
@@ -21,7 +21,7 @@ public class CodeService {
         this.mapper = codeMapper;
     }
 
-    public CodeDto getCode(BigInteger id) {
+    public CodeDto getCode(UUID id) {
         return mapper.toCodeDto(repository.findById(id).orElseThrow());
     }
 
@@ -29,11 +29,11 @@ public class CodeService {
         return mapper.toCodeDto(repository.findFirst10ByOrderByDateDesc());
     }
 
-    public Map.Entry<String, String> addCode(CodeDto codeDto) {
+    public Map.Entry<String, UUID> addCode(CodeDto codeDto) {
         Code code = mapper.toCode(codeDto);
         code.setDate(getDateTimeNowStr());
         repository.save(code);
-        return Map.entry("id", code.getId().toString());
+        return Map.entry("id", code.getId());
     }
 
     public static String getDateTimeNowStr() {

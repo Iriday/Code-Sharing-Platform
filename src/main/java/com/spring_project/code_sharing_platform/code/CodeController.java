@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.math.BigInteger;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 public class CodeController {
@@ -18,7 +18,7 @@ public class CodeController {
     }
 
     @GetMapping("api/code/{id}")
-    ResponseEntity<CodeDto> getCodeAsJson(@PathVariable BigInteger id) {
+    ResponseEntity<CodeDto> getCodeAsJson(@PathVariable UUID id) {
         return ResponseEntity
                 .ok()
                 .header("Content-Type", "application/json")
@@ -34,7 +34,7 @@ public class CodeController {
     }
 
     @PostMapping("api/code/new")
-    ResponseEntity<Map.Entry<String, String>> addCode(@RequestBody CodeDto codeDto) {
+    ResponseEntity<Map.Entry<String, UUID>> addCode(@RequestBody CodeDto codeDto) {
         return ResponseEntity
                 .ok()
                 .header("Content-Type", "application/json")
@@ -42,7 +42,7 @@ public class CodeController {
     }
 
     @GetMapping("/code/{id}")
-    ModelAndView getCodeAsHtml(@PathVariable BigInteger id) {
+    ModelAndView getCodeAsHtml(@PathVariable UUID id) {
         return new ModelAndView("code", "codeDto", codeService.getCode(id));
     }
 
