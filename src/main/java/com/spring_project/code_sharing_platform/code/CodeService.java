@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @Service
 public class CodeService {
-    private static final DateTimeFormatter D_T_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private final CodeRepository repository;
     private final CodeMapper mapper;
 
@@ -31,12 +29,8 @@ public class CodeService {
 
     public Map.Entry<String, UUID> addCode(CodeDto codeDto) {
         Code code = mapper.toCode(codeDto);
-        code.setDate(getDateTimeNowStr());
+        code.setDate(LocalDateTime.now());
         repository.save(code);
         return Map.entry("id", code.getId());
-    }
-
-    public static String getDateTimeNowStr() {
-        return LocalDateTime.now().format(D_T_FORMATTER);
     }
 }

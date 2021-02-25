@@ -3,6 +3,7 @@ package com.spring_project.code_sharing_platform.code;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -13,5 +14,6 @@ public class Code {
     @GeneratedValue
     private UUID id;
     private String code;
-    private String date;
+    @Column(name = "load_date")
+    private LocalDateTime date;
 }
