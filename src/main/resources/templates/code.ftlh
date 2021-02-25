@@ -12,6 +12,12 @@
 <div id="code_and_date_container">
     <div class="code-and-date">
         <span id="load_date">${codeDto.getDate()}</span>
+        <#if codeDto.timeLimit>
+            <br><span id="time_restriction">The code will be available for ${codeDto.time} seconds</span>
+        </#if>
+        <#if codeDto.viewsLimit>
+            <br><span id="views_restriction">${codeDto.views} more views available</span>
+        </#if>
         <pre id="code_snippet"><code>${codeDto.getCode()}</code></pre>
     </div>
 </div>

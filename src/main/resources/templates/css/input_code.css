@@ -1,13 +1,16 @@
+#form_container {
+    margin: 25px 35px 15px;
+}
+
+#code_snippet, #time_restriction, #views_restriction {
+    margin-bottom: 10px;
+}
+
 #code_snippet {
     width: 1000px;
     height: 500px;
-    margin: 15px 35px 15px;
     padding: 10px;
     background-color: gainsboro;
     border: thin solid black;
     border-radius: 3px;
-}
-
-#send_snippet {
-    margin-left: 35px;
 }

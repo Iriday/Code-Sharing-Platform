@@ -20,16 +20,21 @@ public class CodeService {
     }
 
     public CodeDto getCode(UUID id) {
-        return mapper.toCodeDto(repository.findById(id).orElseThrow());
+        Code code = repository.findActiveById(id).orElseThrow();
+        if (code.isViewsLimit()) {
+            code.setViews(code.getViews() - 1);
+        }
+        repository.save(code);
+        return mapper.toCodeDto(code);
     }
 
     public List<CodeDto> get10LatestSortedByDateDesc() {
-        return mapper.toCodeDto(repository.findFirst10ByOrderByDateDesc());
+        return mapper.toCodeDto(repository.findFirst10ByTimeLimitIsFalseAndViewsLimitIsFalseOrderByLoadDateDesc());
     }
 
     public Map.Entry<String, UUID> addCode(CodeDto codeDto) {
         Code code = mapper.toCode(codeDto);
-        code.setDate(LocalDateTime.now());
+        code.setLoadDate(LocalDateTime.now());
         repository.save(code);
         return Map.entry("id", code.getId());
     }

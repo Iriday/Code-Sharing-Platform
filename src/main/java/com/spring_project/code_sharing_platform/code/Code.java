@@ -14,6 +14,10 @@ public class Code {
     @GeneratedValue
     private UUID id;
     private String code;
-    @Column(name = "load_date")
-    private LocalDateTime date;
+    private LocalDateTime loadDate;
+    private LocalDateTime exprDate;
+    private long time;
+    private long views;
+    private boolean timeLimit;
+    private boolean viewsLimit;
 }
