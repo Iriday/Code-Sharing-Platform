@@ -38,4 +38,8 @@ public class CodeService {
         repository.save(code);
         return Map.entry("id", code.getId());
     }
+
+    public void deleteInactiveCodes() {
+        repository.deleteAllByViewsLimitIsTrueAndViewsEqualsOrTimeLimitIsTrueAndExprDateBefore(0, LocalDateTime.now());
+    }
 }
