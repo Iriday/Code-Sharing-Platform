@@ -1,10 +1,11 @@
 package com.spring_project.code_sharing_platform.code;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,27 +19,18 @@ public class CodeController {
     }
 
     @GetMapping("api/code/{id}")
-    ResponseEntity<CodeDto> getCodeAsJson(@PathVariable UUID id) {
-        return ResponseEntity
-                .ok()
-                .header("Content-Type", "application/json")
-                .body(codeService.getCode(id));
+    CodeDto getCodeAsJson(@PathVariable UUID id) {
+        return codeService.getCode(id);
     }
 
     @GetMapping("api/code/latest")
-    ResponseEntity<CodeDto[]> getCodeLatestAsJson() {
-        return ResponseEntity
-                .ok()
-                .header("Content-Type", "application/json")
-                .body(codeService.get10LatestSortedByDateDesc().toArray(CodeDto[]::new));
+    List<CodeDto> getCodeLatestAsJson() {
+        return codeService.get10LatestSortedByDateDesc();
     }
 
     @PostMapping("api/code/new")
-    ResponseEntity<Map.Entry<String, UUID>> addCode(@RequestBody CodeDto codeDto) {
-        return ResponseEntity
-                .ok()
-                .header("Content-Type", "application/json")
-                .body(codeService.addCode(codeDto));
+    Map.Entry<String, UUID> addCode(@Valid @RequestBody CodeDto codeDto) {
+        return codeService.addCode(codeDto);
     }
 
     @GetMapping("/code/{id}")

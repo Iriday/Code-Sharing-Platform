@@ -1,7 +1,9 @@
 package com.spring_project.code_sharing_platform.code;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,7 +22,7 @@ public class CodeService {
     }
 
     public CodeDto getCode(UUID id) {
-        Code code = repository.findActiveById(id).orElseThrow();
+        Code code = repository.findActiveById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         if (code.isViewsLimit()) {
             code.setViews(code.getViews() - 1);
         }
